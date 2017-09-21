@@ -12,3 +12,12 @@ rjung :
 meld : rjung ; $@ mod_define.c rjung/mod_define.c
 
 mod_define.md : ; pandoc rjung/$(@:.md=.html) -o $@
+
+ApacheDir = $(HOME)/apache22
+APXS = $(ApacheDir)/sbin/apxs
+
+apxs : ; $(APXS) -q CFLAGS
+
+build : ; $(APXS) -c mod_define.c
+
+install : ; $(APXS) -cia mod_define.c
